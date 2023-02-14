@@ -34,3 +34,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Links to this app on AWS
+Link to [S3-website with 403 Access Denied error](http://tutorial-ecommerce-app.s3-website-us-east-1.amazonaws.com/) 
+Link via [CloudFront](https://d122b3125fg7ym.cloudfront.net/)
