@@ -1,13 +1,13 @@
-service: node-in-aws-web
+service: test-vue-sportify
 
 frameworkVersion: '2'
 
 provider:
   name: aws
-  region: eu-west-1
-  runtime: nodejs12.x
+  region: us-east-1
+  runtime: nodejs14.x
   # setup profile for AWS CLI.
-  # profile: node-aws
+  profile: student1
 
 plugins:
   - serverless-finch
@@ -18,7 +18,7 @@ plugins:
 
 custom:
   client:
-    bucketName: node-in-aws-web-bucket
+    bucketName: test-vue-sportify-bucket
     distributionFolder: build
   s3BucketName: ${self:custom.client.bucketName}
 
@@ -32,7 +32,7 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.s3BucketName}
-        AccessControl: PublicRead
+        AccessControl: Private
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: index.html
