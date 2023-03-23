@@ -5,11 +5,12 @@ import App from './App.vue';
 import { connectVuetify } from './plugins/vuetify';
 import { connectRouter } from './plugins/vue-router';
 import { connecti18n } from './plugins/vue-i18n';
-
+import Toasted from 'vue-toasted';
 import store from './store/store';
 
 const createApp = () => {
 	Vue.config.productionTip = false;
+	Vue.use(Toasted);
 
 	return new Vue({
 		el: '#app',
