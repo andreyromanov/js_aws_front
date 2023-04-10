@@ -41,7 +41,12 @@ const changeOrderStatus = (orderId: string, data: ChangeOrderStatusParams) => {
 };
 
 const create = (order: Omit<Order, 'statusHistory'>) => {
-	return axios.put(`${API_PATHS.order}/order`, order);
+	const authorization_token = localStorage.getItem('authorization_token');
+	return axios.post(`${API_PATHS.order}/profile/cart/checkout`, order, {
+		headers: {
+			Authorization: `Basic ${authorization_token}`,
+		},
+	});
 };
 
 export const ordersApi = {
