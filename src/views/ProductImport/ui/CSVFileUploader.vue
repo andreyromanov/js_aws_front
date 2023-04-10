@@ -50,29 +50,44 @@ import Vue from 'vue';
 import axios from 'axios';
 
 const fetchPresignedS3Url = (url: string, fileName: string) => {
+	const authorization_token = localStorage.getItem('authorization_token');
 	return axios({
 		method: 'GET',
 		url,
 		params: {
 			name: encodeURIComponent(fileName),
 		},
+		headers: {
+			Authorization: `Basic ${authorization_token}`,
+		},
 	});
 };
 
 const uploadFileBy = async (url: string, file: File) => {
-	const destUrl = await fetchPresignedS3Url(url, file.name);
+	try {
+		const destUrl = await fetchPresignedS3Url(url, file.name);
 
-	console.info('Uploading to: ', destUrl.data);
+		console.info('Uploading to: ', destUrl.data);
 
-	// save
-	const result = await fetch(destUrl.data, {
-		method: 'PUT',
-		body: file,
+		// save
+		const result = await fetch(destUrl.data, {
+			method: 'PUT',
+			body: file,
+		});
+
+		console.info('Result: ', result);
+
+		return result;
+	} catch (error: any) {
+		handleError(error.response.data.message);
+	}
+};
+
+const handleError = (text = 'Error') => {
+	Vue.toasted.show(text, {
+		type: 'error',
+		duration: 2000,
 	});
-
-	console.info('Result: ', result);
-
-	return result;
 };
 
 type Data = {

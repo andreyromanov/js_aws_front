@@ -5,4 +5,3 @@ export const API_PATHS = {
 	bff: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
 	cart: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
 };
-
